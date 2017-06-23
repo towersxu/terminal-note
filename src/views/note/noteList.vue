@@ -1,6 +1,6 @@
 <template>
   <div class="chat-content">
-    <ul id="wrapper">
+    <ul id="msg-list-wrapper">
       <li v-for="list in lists" class="flex-list">
         <div v-if="list.type === messageType.chat">
           <img :src="list.user.avatar_url" class="avatar">
@@ -11,7 +11,6 @@
           </div>
         </div>
         <div v-if="list.type === messageType.markdown">
-          <h1>markdown...</h1>
           <markdown></markdown>
         </div>
       </li>
@@ -25,7 +24,7 @@ import { mapState } from 'vuex'
 export default {
   components: {
     markdown (resolve) {
-      import('../../components/markdown.vue').then((res) => {
+      import('@/components/ed-markdown').then((res) => {
         console.log(res)
         resolve(res)
       })
@@ -50,7 +49,8 @@ export default {
   watch: {
     lists () {
       setTimeout(() => {
-        // $(this.$el).scrollTop($('#wrapper').height())
+        let rect = document.getElementById('msg-list-wrapper').getBoundingClientRect()
+        this.$el.scrollTop = rect.bottom - rect.top
       })
     }
   }

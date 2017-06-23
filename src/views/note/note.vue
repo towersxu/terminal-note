@@ -28,29 +28,28 @@ export default {
         e.preventDefault()
       }
       if (e.keyCode !== 13 || !e.composed || !e.ctrlKey || !this.noteText) return
-
-      const match1 = this.noteText.match(/^\+(.*)/)
-      if (match1) {
-        this.$store.dispatch('newNote', {
-          content: match1[1]
-        })
-        this.noteText = ''
-        return
-      }
       const commend = this.noteText.split(/\s+/)
-      if (commend.length > 0 && commend[1] === 'article' && commend[3] === 'markdown') {
-        const data = {
-          type: this.messageType.markdown,
-          key: commend[0],
-          subTag: 'article'
-        }
-        this.$store.commit('NOTE_LIST', data)
+      const data = {
+        type: this.messageType.markdown,
+        key: commend[0],
+        subTag: 'article'
       }
-      else {
-        this.$store.dispatch('sendNote', {
-          content: this.noteText
-        })
-      }
+      this.$store.commit('NOTE_LIST', data)
+
+      // const commend = this.noteText.split(/\s+/)
+      // if (commend.length > 0 && commend[1] === 'article' && commend[3] === 'markdown') {
+      //   const data = {
+      //     type: this.messageType.markdown,
+      //     key: commend[0],
+      //     subTag: 'article'
+      //   }
+      //   this.$store.commit('NOTE_LIST', data)
+      // }
+      // else {
+      //   this.$store.dispatch('sendNote', {
+      //     content: this.noteText
+      //   })
+      // }
       this.noteText = ''
     }
   },
@@ -66,11 +65,11 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  padding-bottom: 200px;
+  padding-bottom: 100px;
   box-sizing: border-box;
 }
 .input-box {
-  height: 200px;
+  height: 100px;
   width: 100%;
   border-top: 1px solid #969a9b;
   position: absolute;
