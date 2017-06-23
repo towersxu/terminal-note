@@ -1,6 +1,7 @@
 <script>
   // import {markdown} from 'markdown'
   // import MarkdownIt from 'markdown-it'
+  import hljs from 'highlight.js'
 
   var md = require('markdown-it')({
     html: false,        // Enable HTML tags in source
@@ -23,9 +24,23 @@
     // Highlighter function. Should return escaped HTML,
     // or '' if the source string is not changed and should be escaped externaly.
     // If result starts with <pre... internal wrapper is skipped.
-    highlight: function (str, lang) { return '' }
+    highlight: function (str, lang) {
+      console.log(3333)
+      if (lang && hljs.getLanguage(lang)) {
+        try {
+          let val = hljs.highlight(lang, str).value
+          console.log(val)
+          return val
+        }
+        catch (__) {
+          console.log(__)
+        }
+      }
+
+      return ''
+    }
   }) // eslint-ignore
-  // let md = ''
+
   export default {
     data () {
       return {
@@ -42,10 +57,9 @@
     methods: {
       preview (idx) {
         if (idx === 1) {
-          console.log(md)
-          console.log(md.render)
+          console.log(hljs)
           let html = md.render(this.content)
-          console.log(html)
+          // html = highlightAuto.highlightBlock(html)
           this.previewContent = html
         }
       }
@@ -64,12 +78,16 @@
         </div>
         <md-tabs @change="preview">
           <md-tab id="write" md-label="编写">
-            <textarea class="editor-textarea" v-model="content"></textarea>
-            <div class="upload-tips"></div>
+            <div class="content">
+              <textarea class="editor-textarea" v-model="content"></textarea>
+              <div class="upload-tips"></div>
+            </div>
           </md-tab>
 
           <md-tab id="preview" md-label="预览">
-            <div v-html="previewContent"></div>
+            <div class="content">
+              <div v-html="previewContent"></div>
+            </div>
           </md-tab>
         </md-tabs>
       </md-card-content>
