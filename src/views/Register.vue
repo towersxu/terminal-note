@@ -24,7 +24,7 @@
   </div>
 </template>
 <script>
-import api from '../store/api'
+import api from '../services/index'
 import dayAnimate from './svg/day.vue'
 
 export default {

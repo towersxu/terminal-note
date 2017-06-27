@@ -4,7 +4,7 @@
 const socketServe = window.SOCKET_SERVER // eslint-disable-line
 const axios = window.axios // eslint-disable-line
 let socket = {}
-if (socketServe) {
+if (socketServe && !socket.connected) {
   socket = io(socketServe) // eslint-disable-line
   socket.emit('connection')
 }
@@ -42,5 +42,23 @@ export default {
   },
   emit (key, data) {
     socket.emit(key, data)
+  },
+  // getUploadToken (key) {
+  //   socket.emit('upload token', {key})
+  // },
+  getUploadToken (key) {
+    return new Promise((resolve, reject) => {
+      if (!socket.connected) reject({msg: '无法连接到服务器'})
+
+      socket.emit('upload token', {key})
+
+      socket.on('upload token', (data) => {
+        // socket.off('upload token')
+        resolve(data)
+      })
+      socket.on('upload token error', (data) => {
+        reject(data)
+      })
+    })
   }
 }

@@ -59,9 +59,14 @@
         if (idx === 1) {
           console.log(hljs)
           let html = md.render(this.content)
+          console.log(html)
           // html = highlightAuto.highlightBlock(html)
           this.previewContent = html
         }
+      },
+      save () {
+        console.log('save..')
+        this.$emit('save', this.content)
       }
     }
   }
@@ -93,10 +98,9 @@
       </md-card-content>
 
       <md-card-actions>
-        <md-button>保存</md-button>
+        <md-button @click.native="save">保存</md-button>
       </md-card-actions>
     </md-card>
-
   </div>
 </template>
 <style scoped>

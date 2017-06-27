@@ -1,4 +1,4 @@
-import api from './api'
+import api from '../services/index'
 import storage from '../assets/js/storage'
 
 const actions = {
@@ -59,6 +59,12 @@ const actions = {
   },
   register ({ commit }, { userInfo }) {
     api.register(userInfo)
+  },
+  getToken ({ commit }, {key, cb}) {
+    api.getUploadToken(key)
+    api.on('upload token', (data) => {
+      cb(data)
+    })
   }
 }
 
