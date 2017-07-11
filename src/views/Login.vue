@@ -62,6 +62,9 @@ export default {
         userInfo: {
           account: this.account,
           password: this.password
+        },
+        cb: () => {
+          this.$router.push({name: 'note'})
         }
       })
     }

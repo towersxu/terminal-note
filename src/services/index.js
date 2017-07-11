@@ -3,6 +3,23 @@
  */
 const socketServe = window.SOCKET_SERVER // eslint-disable-line
 const axios = window.axios // eslint-disable-line
+import qs from 'qs'
+axios.defaults.baseURL = 'api' // eslint-disable-line
+axios.interceptors.request.use((request) => {
+  if (request.data && request.headers['Content-Type'] === 'application/x-www-form-urlencoded') {
+    request.data = qs.stringify(request.data, { allowDots: true })
+  }
+  if (request.method === 'get') {
+    if (request.url.indexOf('?') === -1) {
+      request.url += '?noche=' + new Date().getTime()
+    }
+    else {
+      request.url += '&nocha=' + new Date().getTime()
+    }
+  }
+  return request
+})
+
 let socket = {}
 if (socketServe && !socket.connected) {
   socket = io(socketServe) // eslint-disable-line
@@ -32,7 +49,21 @@ export default {
     socket.emit('room:join', { roomId })
   },
   login (userInfo) {
-    socket.emit('login', userInfo)
+    return new Promise((resolve, reject) => {
+      axios({
+        method: 'post',
+        url: 'users/who',
+        data: userInfo,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      })
+      // axios.post('homework/draft/save', data)
+      .then((res) => {
+        resolve(res.data)
+      })
+      .catch((error) => {
+        reject(error)
+      })
+    })
   },
   register (userInfo) {
     socket.emit('register', userInfo)

@@ -10,12 +10,12 @@ Vue.use(Router)
 
 const routes = [
   { path: '/hello', component: Hello },
-  { path: '/note', component: Note },
+  { path: '/note', component: Note, name: 'note' },
   { path: '/home', component: Home },
   { path: '/', component: Login },
   { path: '/mobile', component: Login },
-  { path: '/login', component: Login },
-  { path: '/register', component: Register }
+  { path: '/login', component: Login, name: 'login' },
+  { path: '/register', component: Register, name: 'register' }
 ]
 
 export default new Router({

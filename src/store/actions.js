@@ -50,12 +50,17 @@ const actions = {
   addListen ({ state }, { key, callback }) {
     api.on(key, callback)
   },
-  login ({ commit }, { userInfo }) {
-    api.login(userInfo)
-    api.on('login', (data) => {
-      console.log(data)
+  login ({ commit }, { userInfo, cb }) {
+    api.login(userInfo).then((data) => {
       commit('LOGIN_STATUS', data)
+      if (cb) {
+        cb()
+      }
     })
+    // api.on('login', (data) => {
+    //   console.log(data)
+    //   commit('LOGIN_STATUS', data)
+    // })
   },
   register ({ commit }, { userInfo }) {
     api.register(userInfo)
