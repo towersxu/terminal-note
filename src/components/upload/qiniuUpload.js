@@ -61,6 +61,11 @@ function qiniuUpload (data, key, type = 'application/octet-stream') {
       }
     }
   })
+  .catch((err) => {
+    if (typeof upObject.keys.error === 'function') {
+      upObject.keys.error(err)
+    }
+  })
   return upObject
 }
 

@@ -6,6 +6,7 @@
   import { mapState } from 'vuex'
   import guid from '@/utils/guid.js'
   import qiniuUpload from '@/components/upload/qiniuUpload'
+  import services from '../../services/index'
 
   export default {
     computed: mapState({
@@ -26,7 +27,17 @@
           let type = 'text/x-markdown'
           let qu = qiniuUpload(content, key, type)
           qu.on('success', function () {
-            console.log('upload success...')
+            console.log('success//')
+            services.addNewArticle({
+              title: '十万个为什么1',
+              label: 'test',
+              type: 'markdown',
+              subtag: 'article',
+              file: key
+            })
+            .then((res) => {
+              console.log(res)
+            })
           })
         })
         md.$mount(this.$el)

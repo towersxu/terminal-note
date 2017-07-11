@@ -60,5 +60,16 @@ export default {
         reject(data)
       })
     })
+  },
+  addNewArticle (data) {
+    return new Promise((resolve, reject) => {
+      if (!socket.connected) reject({msg: '无法连接到服务器'})
+      console.log(data)
+      socket.emit('article:new', data)
+
+      socket.on('article:new', (res) => {
+        resolve(res)
+      })
+    })
   }
 }
