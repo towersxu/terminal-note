@@ -27,13 +27,12 @@
           let type = 'text/x-markdown'
           let qu = qiniuUpload(content, key, type)
           qu.on('success', function () {
-            console.log('success//')
             services.addNewArticle({
-              title: '十万个为什么1',
-              label: 'test',
-              type: 'markdown',
-              subtag: 'article',
-              file: key
+              title: 'react开始实践',
+              type: 'tips',
+              tags: ['react', '开发实践', '练习'],
+              fileName: key,
+              fileBucket: 'markdown'
             })
             .then((res) => {
               console.log(res)
