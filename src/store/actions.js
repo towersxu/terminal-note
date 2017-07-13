@@ -70,6 +70,11 @@ const actions = {
     api.on('upload token', (data) => {
       cb(data)
     })
+  },
+  query ({ commit }, {cmd, cb}) {
+    api.query(cmd).then((res) => {
+      cb(res)
+    })
   }
 }
 

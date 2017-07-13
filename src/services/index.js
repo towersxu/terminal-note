@@ -102,5 +102,23 @@ export default {
         resolve(res)
       })
     })
+  },
+  changeArticleTitle (data) {
+    return new Promise((resolve, reject) => {
+      if (!socket.connected) reject({msg: '无法连接服务器'})
+
+      socket.emit('article:change:title', data)
+    })
+  },
+  query (data) {
+    return new Promise((resolve, reject) => {
+      if (!socket.connected) reject({msg: '无法连接服务器'})
+
+      socket.emit('query', data)
+
+      socket.on('query', (res) => {
+        resolve(res)
+      })
+    })
   }
 }

@@ -28,13 +28,22 @@ export default {
         e.preventDefault()
       }
       if (e.keyCode !== 13 || !e.composed || !e.ctrlKey || !this.noteText) return
-      const commend = this.noteText.split(/\s+/)
-      const data = {
-        type: this.messageType.markdown,
-        key: commend[0],
-        subTag: 'article'
+      const commend = this.noteText.split(/ +/)
+      const data = {}
+      if (commend[0] === 'markdown') {
+        data.type = this.messageType.markdown
+        this.$store.commit('NOTE_LIST', data)
       }
-      this.$store.commit('NOTE_LIST', data)
+      else {
+        // data.type = this.messageType.cmd
+        this.$store.dispatch('query', {
+          cmd: this.noteText,
+          cb: (res) => {
+            console.log('cb...')
+            console.log(res)
+          }
+        })
+      }
 
       // const commend = this.noteText.split(/\s+/)
       // if (commend.length > 0 && commend[1] === 'article' && commend[3] === 'markdown') {

@@ -36,6 +36,12 @@
             })
             .then((res) => {
               console.log(res)
+              setTimeout(() => {
+                services.changeArticleTitle({
+                  title: 'react开始实践',
+                  newTitle: 'vue实践'
+                })
+              }, 1000)
             })
           })
         })
