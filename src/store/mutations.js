@@ -23,6 +23,9 @@ const mutations = {
   NOTE_LIST (states, msg) {
     states.notes.push(msg)
   },
+  NOTE_LIST_CLEAR (states, msg) {
+    states.notes = []
+  },
   LOGIN_STATUS (states, msg) {
     states.pageStatus = msg.status ? 3 : 0
     states.errorMsg = msg.message

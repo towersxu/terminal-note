@@ -45,6 +45,17 @@ export default {
       cb(error)
     })
   },
+  getFileByAjax (src) {
+    return new Promise((resolve, reject) => {
+      axios.get(src)
+      .then((res) => {
+        resolve(res)
+      })
+      .catch((error) => {
+        reject(error)
+      })
+    })
+  },
   joinRoom (roomId) {
     socket.emit('room:join', { roomId })
   },
@@ -117,6 +128,17 @@ export default {
       socket.emit('query', data)
 
       socket.on('query', (res) => {
+        resolve(res)
+      })
+    })
+  },
+  search (data) {
+    return new Promise((resolve, reject) => {
+      if (!socket.connected) reject({msg: '无法连接服务器'})
+
+      socket.emit('search', data)
+
+      socket.on('search', (res) => {
         resolve(res)
       })
     })

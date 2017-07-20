@@ -27,39 +27,36 @@ export default {
       if (e.keyCode === 9) { // tab键，自动补齐
         e.preventDefault()
       }
-      if (e.keyCode !== 13 || !e.composed || !e.ctrlKey || !this.noteText) return
+      if ((e.keyCode !== 13 && e.keyCode !== 9) || !this.noteText) return
       const commend = this.noteText.split(/ +/)
       const data = {}
       if (commend[0] === 'markdown') {
         data.type = this.messageType.markdown
         this.$store.commit('NOTE_LIST', data)
+        this.noteText = ''
+      }
+      else if (commend[0] === 'clear') {
+        this.$store.commit('NOTE_LIST_CLEAR')
+        this.noteText = ''
       }
       else {
         // data.type = this.messageType.cmd
-        this.$store.dispatch('query', {
-          cmd: this.noteText,
-          cb: (res) => {
-            console.log('cb...')
-            console.log(res)
-          }
-        })
+        if (e.keyCode === 9) {
+          this.$store.dispatch('query', {
+            cmd: this.noteText,
+            cb: (res) => {
+              console.log('cb...')
+              console.log(res)
+            }
+          })
+        }
+        else {
+          this.$store.dispatch('search', {
+            cmd: this.noteText
+          })
+          this.noteText = ''
+        }
       }
-
-      // const commend = this.noteText.split(/\s+/)
-      // if (commend.length > 0 && commend[1] === 'article' && commend[3] === 'markdown') {
-      //   const data = {
-      //     type: this.messageType.markdown,
-      //     key: commend[0],
-      //     subTag: 'article'
-      //   }
-      //   this.$store.commit('NOTE_LIST', data)
-      // }
-      // else {
-      //   this.$store.dispatch('sendNote', {
-      //     content: this.noteText
-      //   })
-      // }
-      this.noteText = ''
     }
   },
   components: {

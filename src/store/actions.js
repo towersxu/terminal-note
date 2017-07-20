@@ -75,6 +75,11 @@ const actions = {
     api.query(cmd).then((res) => {
       cb(res)
     })
+  },
+  search ({ commit }, {cmd}) {
+    api.search(cmd).then((res) => {
+      commit('NOTE_LIST', res)
+    })
   }
 }
 

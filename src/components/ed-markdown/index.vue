@@ -21,27 +21,26 @@
       import('./markdown.vue').then((res) => {
         let Markdown = Vue.extend(res)
         let md = new Markdown()
-        md.$on('save', (content) => {
-          console.log(content)
+        md.$on('save', (res) => {
           let key = new Date().getTime() + '-' + this.user.id + '.md'
           let type = 'text/x-markdown'
-          let qu = qiniuUpload(content, key, type)
-          qu.on('success', function () {
+          let qu = qiniuUpload(res.content, key, type)
+          qu.on('success', () => {
             services.addNewArticle({
-              title: 'react开始实践',
+              title: res.title,
               type: 'tips',
-              tags: ['react', '开发实践', '练习'],
+              tags: res.labels,
               fileName: key,
               fileBucket: 'markdown'
             })
-            .then((res) => {
-              console.log(res)
-              setTimeout(() => {
-                services.changeArticleTitle({
-                  title: 'react开始实践',
-                  newTitle: 'vue实践'
+            .then((data) => {
+              if (data.t === 1) {
+                // 成功后生成命令去查询一次。
+                let cmd = res.labels.join(' ')
+                this.$store.dispatch('search', {
+                  cmd: cmd
                 })
-              }, 1000)
+              }
             })
           })
         })

@@ -33,13 +33,16 @@ function qiniuUpload (data, key, type = 'application/octet-stream') {
     formData.append('file', blob, key)
     let xhr = new XMLHttpRequest()
     xhr.open('POST', 'http://up-z2.qiniu.com')
+    // xhr.open('POST', 'http://localhost:8080/api/upload')
     xhr.send(formData)
     xhr.upload.addEventListener('progress', (e)=> {
       xhr.percent = (e.loaded / e.total) * 100
+      console.log('progress')
+      console.log(22222)
       if (typeof upObject.keys.progress === 'function') {
         upObject.keys.progress(xhr.percent)
       }
-    }, false)
+    })
     if (upObject.keys) {
       xhr.onreadystatechange = function () {
         if (xhr.readyState < 4) {

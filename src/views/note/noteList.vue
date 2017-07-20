@@ -13,35 +13,31 @@
         <div v-if="list.type === messageType.markdown">
           <markdown></markdown>
         </div>
+        <div v-if="list.type === 'tips'">
+          <tips :tip="list" :path="list.filePath"></tips>
+        </div>
       </li>
     </ul>
   </div>
 </template>
 <script>
 import { mapState } from 'vuex'
-// import markdown from '../../components/markdown.vue'
 
 export default {
   components: {
     markdown (resolve) {
       import('@/components/ed-markdown').then((res) => {
-        console.log(res)
         resolve(res)
       })
-      // console.log(resolve)
-      // const md = require.ensure(['../../components/markdown.vue'], (res) => {
-      //   console.log('require')
-      //   console.log(res)
-      //   resolve(res)
-      // })
-      // console.log(md)
-      // return md
+    },
+    tips (resolve) {
+      import('@/components/viewers/tips').then((res) => {
+        resolve(res)
+      })
     }
-    // markdown: require.ensure('../../components/markdown.vue')
   },
   computed: mapState({
     lists (state) {
-      console.log(222)
       return state.notes
     },
     messageType: state => state.messageType
@@ -51,7 +47,7 @@ export default {
       setTimeout(() => {
         let rect = document.getElementById('msg-list-wrapper').getBoundingClientRect()
         this.$el.scrollTop = rect.bottom - rect.top
-      })
+      }, 300)
     }
   }
 }

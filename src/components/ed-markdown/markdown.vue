@@ -1,75 +1,54 @@
 <script>
-  // import {markdown} from 'markdown'
-  // import MarkdownIt from 'markdown-it'
-  import hljs from 'highlight.js'
+import md from '@/utils/markdown'
 
-  var md = require('markdown-it')({
-    html: false,        // Enable HTML tags in source
-    xhtmlOut: false,        // Use '/' to close single tags (<br />).                                // This is only for full CommonMark compatibility.
-    breaks: false,        // Convert '\n' in paragraphs into <br>
-    langPrefix: 'language-',  // CSS language prefix for fenced blocks. Can be
-                                // useful for external highlighters.
-    linkify: false,        // Autoconvert URL-like text to links
-
-    // Enable some language-neutral replacement + quotes beautification
-    typographer: false,
-
-    // Double + single quotes replacement pairs, when typographer enabled,
-    // and smartquotes on. Could be either a String or an Array.
-    //
-    // For example, you can use '«»„“' for Russian, '„“‚‘' for German,
-    // and ['«\xA0', '\xA0»', '‹\xA0', '\xA0›'] for French (including nbsp).
-    quotes: '“”‘’',
-
-    // Highlighter function. Should return escaped HTML,
-    // or '' if the source string is not changed and should be escaped externaly.
-    // If result starts with <pre... internal wrapper is skipped.
-    highlight: function (str, lang) {
-      console.log(3333)
-      if (lang && hljs.getLanguage(lang)) {
-        try {
-          let val = hljs.highlight(lang, str).value
-          console.log(val)
-          return val
-        }
-        catch (__) {
-          console.log(__)
-        }
-      }
-
-      return ''
+export default {
+  data () {
+    return {
+      mdtitle: '',
+      mdkey: '',
+      content: '##header',
+      previewContent: '',
+      labels: []
     }
-  }) // eslint-ignore
-
-  export default {
-    data () {
-      return {
-        mdtitle: '',
-        mdkey: '',
-        content: '##header',
-        previewContent: ''
+  },
+  mounted () {
+    // md = new MarkdownIt()
+    // console.log(43444)
+  },
+  methods: {
+    preview (idx) {
+      if (idx === 1) {
+        let html = md.render(this.content)
+        this.previewContent = html
       }
     },
-    mounted () {
-      // md = new MarkdownIt()
-      // console.log(43444)
+    save () {
+      this.$emit('save', {
+        content: this.content,
+        labels: this.labels,
+        title: this.getTitle()
+      })
     },
-    methods: {
-      preview (idx) {
-        if (idx === 1) {
-          console.log(hljs)
-          let html = md.render(this.content)
-          console.log(html)
-          // html = highlightAuto.highlightBlock(html)
-          this.previewContent = html
-        }
-      },
-      save () {
-        console.log('save..')
-        this.$emit('save', this.content)
+    setLabel () {
+      // TODO: 去掉重复label
+      this.labels.push(this.mdkey)
+      this.mdkey = ''
+    },
+    removeLabel (index) {
+      this.labels.splice(index, 1)
+    },
+    getTitle () {
+      let title = ''
+      let content = this.content.match(/\r|\n/)
+      let index = 20
+      if (content && content.index) {
+        index = content.index
       }
+      title = this.content.substr(0, index)
+      return title.replace(/\#|>/g, '')
     }
   }
+}
 </script>
 <template>
   <div class="md-wrapper">
@@ -78,10 +57,15 @@
         <div class="key">
           <md-input-container>
             <label>请输入关键字</label>
-            <md-input v-model="mdkey"></md-input>
+            <md-input v-model="mdkey" @keyup.native.enter="setLabel()"></md-input>
           </md-input-container>
+          <div class="labels">
+            <span class="label" v-for="(label, index) in labels" @click="removeLabel(index)">
+              <span>{{label}}</span>
+            </span>
+          </div>
         </div>
-        <md-tabs @change="preview">
+        <md-tabs @change="preview" class="card-content">
           <md-tab id="write" md-label="编写">
             <div class="content">
               <textarea class="editor-textarea" v-model="content"></textarea>
@@ -108,6 +92,9 @@
   margin: 20px;
   width: 698px;
 }
+.md-wrapper .card-content {
+  padding-bottom: 0;
+}
 .editor-textarea {
   display: block;
   width: 100%;
@@ -129,5 +116,23 @@
   border-radius: 3px;
   outline: none;
   box-shadow: inset 0 1px 2px rgba(27,31,35,0.075);
+}
+.key {
+  position: relative;
+}
+.label {
+  display: inline-block;
+  padding: 0.3em 0.9em;
+  margin: 0 0.5em 0.5em 0;
+  white-space: nowrap;
+  background-color: #f1f8ff;
+  border-radius: 3px;
+  color: #0366d6;
+  font-size: 12px;
+}
+.label:hover {
+  text-decoration: none;
+  background-color: #ddeeff;
+  color: #ff5722;
 }
 </style>
