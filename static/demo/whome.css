@@ -1,0 +1,106 @@
+/* 了解自我 */
+/* 背景颜色 */
+.me-content {
+  padding: 20px 25px;
+  background: #fff;
+}
+.me-banner {
+  position: relative;
+  height: 332px;
+  z-index: 1;
+}
+.me-banner-bg {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+.me-banner-title-wrap {
+  padding-top: 44px;
+}
+.me-banner-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: normal;
+  color: #fff;
+}
+.me-banner-desc {
+  color: #fff;
+  margin: 20px 35px;
+  font-size: 16px;
+}
+.me-banner-desc p {
+  text-indent: 32px;
+}
+.me-banner-btn {
+  margin-top: 50px;
+  text-align: center;
+}
+.me-banner-btn .btn {
+  margin: 0 10px;
+}
+.me-cards-wrap {
+  width: 1240px;
+  overflow: hidden;
+}
+.me-cards {
+  margin-top: 20px;
+  width: 1400px;
+}
+.me-cards .card-item {
+  width: 226px;
+  height: 328px;
+  float: left;
+  margin-right: 25px;
+}
+.me-cards .card-item .front,
+.me-cards .card-item .back {
+  width: 226px;
+  height: 328px;
+}
+.me-cards .card-item-img {
+  margin-top: 65px;
+}
+.me-cards .card-front {
+  text-align: center;
+}
+.me-cards .card-item-title {
+  font-size: 24px;
+  color: #fff;
+  margin-top: 30px;
+}
+.me-cards .card-item-content-wrap {
+  position: relative;
+  padding: 20px;
+}
+.me-cards .card-item-content {
+  font-size: 16px;
+  color: #fff;
+  line-height: 32px;
+}
+.me-cards .card-item1 .front,
+.me-cards .card-item1 .back {
+  background: #46b3ef;
+}
+.me-cards .card-item2 .front,
+.me-cards .card-item2 .back {
+  background: #65cae0;
+}
+.me-cards .card-item3 .front,
+.me-cards .card-item3 .back {
+  background: #45d5a2;
+}
+.me-cards .card-item4 .front,
+.me-cards .card-item4 .back {
+  background: #f9ae55;
+}
+.me-cards .card-item5 .front,
+.me-cards .card-item5 .back {
+  background: #fd845e;
+}
+.me-cards .toggle-card .card-front.hover {
+  height: 0;
+  opacity: 0;
+  transition: all ease 1s;
+  -ms-filter: "alpha(opacity=0)";
+}

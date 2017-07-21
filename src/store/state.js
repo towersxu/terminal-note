@@ -7,7 +7,8 @@ const state = {
   messageType: {
     markdown: 1, // 消息类型， 1， markdown
     chat: 2, // 消息类型，聊天
-    cmd: 3 // 命令形式
+    cmd: 3, // 命令形式
+    iframe: 4 // iframe嵌套网页
   },
   isLoading: false,
   pageStatus: 0, // 0-操作失败；1-登陆成功；2-注册成功

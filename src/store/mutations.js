@@ -21,7 +21,9 @@ const mutations = {
     states.list.push(msg)
   },
   NOTE_LIST (states, msg) {
+    console.log(states.notes)
     states.notes.push(msg)
+    console.log(states.notes)
   },
   NOTE_LIST_CLEAR (states, msg) {
     states.notes = []

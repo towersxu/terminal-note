@@ -1,0 +1,109 @@
+.wei-content {
+  padding: 30px 50px 100px 50px;
+  background: #fff;
+  overflow: hidden;
+}
+.wei-content a {
+  color: #3473e8;
+}
+.wei-content a:hover {
+  color: #1a61e5;
+}
+.wei-content a:visited {
+  color: #3473e8;
+}
+.wei-content-title {
+  font-size: 30px;
+  color: #1187dc;
+  font-weight: normal;
+  text-align: center;
+  line-height: 48px;
+}
+.wei-content-info {
+  margin: 20px;
+  font-size: 16px;
+  color: #333;
+}
+.wei-content-info .wei-sub-p {
+  color: #666;
+  text-indent: 32px;
+}
+.wei-content-info .wei-space-ele {
+  margin-bottom: 32px;
+}
+.wei-card-wrap {
+  width: 1280px;
+}
+.wei-card-wrap .wei-card {
+  width: 566px;
+  padding: 45px 0;
+  margin-right: 50px;
+  float: left;
+}
+.wei-card-wrap .wei-card.wei-card-blue {
+  background: #39a2ee;
+}
+.wei-card-wrap .wei-card.wei-card-green {
+  background: #35b99f;
+}
+.wei-card-title {
+  margin: 0 40px;
+  color: #fff;
+  font-size: 18px;
+}
+.wei-upload {
+  margin-top: 40px;
+}
+.wei-upload-btn {
+  margin-left: 40px;
+  border-width: 2px;
+  padding: 6px 60px;
+}
+.wei-green-btn {
+  background: #35b99f;
+}
+.wei-green-btn:hover {
+  background: #30a68f;
+}
+.wei-green-btn:active {
+  background: #32b097;
+}
+.wei-progress-wrap {
+  margin: 40px 0 0 40px;
+  display: none;
+}
+.wei-upload-name {
+  width: 160px;
+  display: inline-block;
+  font-size: 14px;
+  color: #fff;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-right: 23px;
+  vertical-align: middle;
+}
+.wei-upload-name.upload-finished {
+  width: auto;
+  max-width: 360px;
+}
+.wei-progress-container {
+  width: 150px;
+  border: 1px solid #fff;
+  height: 6px;
+  margin: 6px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.wei-progress-container .wei-progress {
+  height: 6px;
+  background: #fff;
+  transition: all 0.3s;
+  width: 0%;
+}
+.wei-upload-delete {
+  display: none;
+  color: #fff;
+  vertical-align: middle;
+  cursor: pointer;
+}

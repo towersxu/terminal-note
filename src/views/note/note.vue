@@ -29,14 +29,26 @@ export default {
       }
       if ((e.keyCode !== 13 && e.keyCode !== 9) || !this.noteText) return
       const commend = this.noteText.split(/ +/)
-      const data = {}
+      let data = {}
+      console.log(e.keyCode)
       if (commend[0] === 'markdown') {
         data.type = this.messageType.markdown
-        this.$store.commit('NOTE_LIST', data)
+        this.$store.commit('NOTE_LIST', Object.assign({}, data))
         this.noteText = ''
       }
       else if (commend[0] === 'clear') {
         this.$store.commit('NOTE_LIST_CLEAR')
+        this.noteText = ''
+      }
+      // iframe add http://10.4.84.19:8080/static/demo/wei.html --width=1280 --height=360 --name="jquery upload demo"
+      else if (commend[0] === 'iframe') {
+        this.$store.commit('NOTE_LIST', {
+          type: this.messageType.iframe,
+          src: 'http://10.4.84.19:8080/static/demo/wei.html',
+          width: 1280,
+          height: 360,
+          name: 'jquery upload demo'
+        })
         this.noteText = ''
       }
       else {

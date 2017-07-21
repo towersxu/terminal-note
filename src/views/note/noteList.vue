@@ -2,20 +2,23 @@
   <div class="chat-content">
     <ul id="msg-list-wrapper">
       <li v-for="list in lists" class="flex-list">
-        <div v-if="list.type === messageType.chat">
+        <template v-if="list.type === messageType.chat">
           <img :src="list.user.avatar_url" class="avatar">
           <div class="msg-panel">
             <span class="appicon icon-chatarrow"></span>
             <p class="name">{{list.user.name}}</p>
             <p class="msg">{{list.text}}</p>
           </div>
-        </div>
-        <div v-if="list.type === messageType.markdown">
+        </template>
+        <template v-if="list.type === messageType.markdown">
           <markdown></markdown>
-        </div>
-        <div v-if="list.type === 'tips'">
+        </template>
+        <template v-if="list.type === 'tips'">
           <tips :tip="list" :path="list.filePath"></tips>
-        </div>
+        </template>
+        <template v-if="list.type === messageType.iframe">
+          <xiframe :info="list"></xiframe>
+        </template>
       </li>
     </ul>
   </div>
@@ -32,6 +35,11 @@ export default {
     },
     tips (resolve) {
       import('@/components/viewers/tips').then((res) => {
+        resolve(res)
+      })
+    },
+    xiframe (resolve) {
+      import('@/components/viewers/xiframe').then((res) => {
         resolve(res)
       })
     }

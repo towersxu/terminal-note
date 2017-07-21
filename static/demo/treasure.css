@@ -1,0 +1,385 @@
+/* 高考百宝箱 TreasureBox 前缀:tb*/
+/* 背景颜色 */
+/* 字体颜色 */
+/* 边框颜色 */
+/* 长度 */
+.tb-content {
+  position: relative;
+  margin-top: 20px;
+  color: #333;
+}
+.tb-sidebar {
+  width: 230px;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  background-color: #f7f7f7;
+  z-index: 9;
+}
+.tb-main {
+  margin-left: 230px;
+  background-color: #fff;
+  min-height: 800px;
+  padding: 20px 30px;
+}
+/* sidebar */
+.tb-sidebar-head {
+  background-color: #1187dc;
+  padding: 20px 0;
+  text-align: center;
+  line-height: 1;
+}
+.tb-sidebar-head .cp-title {
+  font-size: 26px;
+  color: #fff;
+}
+.tb-sidebar-head .cp-subtitle {
+  color: #fff;
+  margin-top: 10px;
+  font-size: 14px;
+}
+.tb-sidebar-nav .cp-item {
+  display: block;
+  padding: 15px 0;
+  font-size: 16px;
+  cursor: pointer;
+  color: #333;
+}
+.tb-sidebar-nav .cp-item .cp-text {
+  vertical-align: middle;
+}
+.tb-sidebar-nav .cp-item .cp-text:before {
+  content: "";
+  display: inline-block;
+  margin-left: 60px;
+  margin-right: 15px;
+  vertical-align: middle;
+  width: 25px;
+  height: 26px;
+  line-height: 1;
+}
+.tb-sidebar-nav .cp-item .cp-text.college-info:before {
+  background: url("../img/icon/icon5.png") center center no-repeat;
+}
+.tb-sidebar-nav .cp-item .cp-text.major-info:before {
+  background: url("../img/icon/icon1.png") center center no-repeat;
+}
+.tb-sidebar-nav .cp-item .cp-text.entrance-ways:before {
+  background: url("../img/icon/icon2.png") center center no-repeat;
+}
+.tb-sidebar-nav .cp-item .cp-text.profession-info:before {
+  background: url("../img/icon/icon3.png") center center no-repeat;
+}
+.tb-sidebar-nav .cp-item .cp-text.score-line:before {
+  background: url("../img/icon/icon4.png") center center no-repeat;
+}
+.tb-sidebar-nav .cp-item .cp-icon {
+  display: inline-block;
+  margin-left: 60px;
+  margin-right: 15px;
+  vertical-align: middle;
+  width: 25px;
+  line-height: 1;
+}
+.tb-sidebar-nav .cp-item:hover,
+.tb-sidebar-nav .cp-item.active {
+  color: #1187dc;
+}
+.tb-sidebar-nav .cp-item:hover .cp-text.college-info:before,
+.tb-sidebar-nav .cp-item.active .cp-text.college-info:before {
+  background: url("../img/icon/icon5g.png") center center no-repeat;
+}
+.tb-sidebar-nav .cp-item:hover .cp-text.major-info:before,
+.tb-sidebar-nav .cp-item.active .cp-text.major-info:before {
+  background: url("../img/icon/icon1g.png") center center no-repeat;
+}
+.tb-sidebar-nav .cp-item:hover .cp-text.entrance-ways:before,
+.tb-sidebar-nav .cp-item.active .cp-text.entrance-ways:before {
+  background: url("../img/icon/icon2g.png") center center no-repeat;
+}
+.tb-sidebar-nav .cp-item:hover .cp-text.profession-info:before,
+.tb-sidebar-nav .cp-item.active .cp-text.profession-info:before {
+  background: url("../img/icon/icon3g.png") center center no-repeat;
+}
+.tb-sidebar-nav .cp-item:hover .cp-text.score-line:before,
+.tb-sidebar-nav .cp-item.active .cp-text.score-line:before {
+  background: url("../img/icon/icon4g.png") center center no-repeat;
+}
+.tb-sidebar-nav .cp-item:not(:last-child) {
+  border-bottom: 1px solid #d9d9d9;
+}
+/* search */
+.tb-search {
+  position: relative;
+  width: 430px;
+  margin: 0 auto 20px;
+  padding-right: 85px;
+  box-sizing: border-box;
+}
+.tb-search .cp-input {
+  height: 40px;
+  line-height: 40px;
+  background-color: #fbfbfb;
+  color: #bbb;
+}
+.tb-search .cp-input:focus {
+  background-color: #fff;
+  color: #333;
+}
+.tb-search .cp-btn {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+/* 选择项目 */
+.tb-rows {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #d9d9d9;
+}
+.tb-rows .cp-row .cp-row-label {
+  min-width: 90px;
+  text-align: right;
+  box-sizing: border-box;
+}
+.tb-rows .cp-row .cp-row-items {
+  position: relative;
+  margin-left: 90px;
+  padding-left: 60px;
+}
+.tb-rows .cp-row .cp-row-items .cp-item:first-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 30px;
+  line-height: 30px;
+  z-index: 9;
+}
+/* 认识职业 */
+/* 认识专业 */
+.tb-content-job .tb-group,
+.tb-content-major .tb-group {
+  margin-bottom: 20px;
+}
+.tb-content-job .tb-group-head,
+.tb-content-major .tb-group-head {
+  color: #333;
+}
+.tb-content-job .tb-group-head .cp-title,
+.tb-content-major .tb-group-head .cp-title,
+.tb-content-job .tb-group-head .cp-subtitle,
+.tb-content-major .tb-group-head .cp-subtitle {
+  border-left: 2px solid #333;
+  padding-left: 10px;
+  margin-right: 20px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+.tb-content-job .tb-group-head .cp-title,
+.tb-content-major .tb-group-head .cp-title {
+  font-size: 18px;
+}
+.tb-content-job .tb-group-head .cp-subtitle,
+.tb-content-major .tb-group-head .cp-subtitle {
+  font-size: 16px;
+}
+.tb-content-job .tb-group-head .cp-subtitle.blue,
+.tb-content-major .tb-group-head .cp-subtitle.blue {
+  color: #108ee9;
+  border-left-color: #108ee9;
+}
+.tb-content-job .tb-group-head .cp-subtitle.green,
+.tb-content-major .tb-group-head .cp-subtitle.green {
+  color: #009d8e;
+  border-left-color: #009d8e;
+}
+.tb-content-job .tb-group-head .cp-subtitle.purple,
+.tb-content-major .tb-group-head .cp-subtitle.purple {
+  color: #3654a7;
+  border-left-color: #3654a7;
+}
+.tb-content-job .tb-group-head .cp-subtitle.orange,
+.tb-content-major .tb-group-head .cp-subtitle.orange {
+  color: #f18f4d;
+  border-left-color: #f18f4d;
+}
+.tb-content-job .tb-group-head .cp-btn,
+.tb-content-major .tb-group-head .cp-btn {
+  vertical-align: middle;
+}
+.tb-content-job .tb-group-body,
+.tb-content-major .tb-group-body {
+  padding: 10px;
+  color: #666;
+}
+.tb-content-job .tb-group-body .pt-inline-item,
+.tb-content-major .tb-group-body .pt-inline-item {
+  display: inline-block;
+  min-width: 150px;
+}
+.tb-content-major .tb-group:first-child {
+  border-bottom: 1px solid #d9d9d9;
+}
+.tb-groups {
+  padding: 20px 0;
+  border-bottom: 1px solid #d9d9d9;
+}
+.tb-groups .tb-group:not(:first-child) {
+  margin-bottom: 0;
+}
+/* 认识职业 */
+.tb-content-job .tb-group-list {
+  width: 300px;
+  z-index: 99;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.tb-content-job .tb-group-list .tb-col1 {
+  width: 30px;
+  border: 1px solid #d9d9d9;
+  font-size: 16px;
+  text-align: center;
+  line-height: 2;
+}
+.tb-content-job .tb-group-list .tb-col2 {
+  border: 0;
+}
+.tb-content-job .tb-group-list .tb-list {
+  list-style: decimal inside;
+}
+.tb-content-job .tb-group-list .tb-list li {
+  float: left;
+  padding-left: 10px;
+  min-width: 50%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.tb-content-job .tb-group-list .tb-list .cp-link {
+  color: #108ee9;
+}
+/* table */
+.cp-table-container {
+  margin-top: 20px;
+}
+.cp-table-container .cp-btn {
+  margin: 0 5px;
+  padding-left: 18px;
+}
+.cp-table-container .tb-icon-school {
+  background: url("../img/icon/icon-school.png") no-repeat center left;
+}
+.cp-table-container .tb-icon-major {
+  background: url("../img/icon/icon-major.png") no-repeat center left;
+}
+/* 认识职业 */
+/* 职业名人 */
+.cp-cards-people .cp-card {
+  background-color: #fff;
+  margin-bottom: 20px;
+  padding: 0 10px;
+  cursor: pointer;
+}
+.cp-cards-people .cp-card img {
+  width: 100%;
+  height: 230px;
+}
+.cp-cards-people .cp-card .cp-link {
+  display: block;
+  cursor: pointer;
+  text-align: center;
+}
+.cp-cards-people .cp-card .cp-link:hover {
+  color: #f18f4d;
+}
+/* 认识学校 */
+.tb-school-basic .cp-card-content {
+  margin-right: 0;
+}
+.tb-school-basic .cp-card-lf,
+.tb-school-basic .cp-card-rt {
+  margin-top: 25px;
+}
+.tb-school-basic .cp-card-lf .pt-inline-items,
+.tb-school-basic .cp-card-rt .pt-inline-items {
+  margin: 5px 0;
+}
+.tb-school-basic .cp-card-lf .pt-inline-first,
+.tb-school-basic .cp-card-rt .pt-inline-first {
+  margin-right: 40px;
+}
+.tb-school-tabs {
+  font-size: 18px;
+  margin-top: 30px;
+  line-height: 2;
+}
+.tb-school-tabs .cp-menu-item {
+  cursor: pointer;
+  vertical-align: middle;
+}
+.tb-school-tabs .cp-menu-item:hover {
+  color: #3654a7;
+}
+.tb-school-tabs .cp-menu-item.active {
+  color: #3654a7;
+  border-bottom: 3px solid #3654a7;
+}
+.tb-school-tabs .cp-menu-item:first-child {
+  margin-left: 20px;
+}
+.tb-school-detail {
+  padding: 20px 0;
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+  min-height: 460px;
+}
+.tb-school-detail .tb-group {
+  background-color: #fbfbfb;
+}
+.tb-school-detail .tb-group ~ .tb-group {
+  margin-top: 10px;
+}
+.tb-school-detail .tb-group-head {
+  padding: 5px 0;
+}
+.tb-school-detail .tb-group-head .cp-title {
+  font-size: 16px;
+  border-left: 2px solid #3654a7;
+  padding-left: 10px;
+  margin-right: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+.tb-school-detail .tb-group-head .cp-mark {
+  vertical-align: middle;
+}
+.tb-school-detail .tb-group-body {
+  padding: 5px 20px;
+}
+.tb-school-detail .tb-group-body .cp-item {
+  cursor: pointer;
+  margin-right: 30px;
+  margin-bottom: 5px;
+  float: left;
+}
+.tb-school-detail .tb-group-body .cp-item:hover {
+  color: #3654a7;
+}
+.tb-school-detail .tb-school-scores {
+  margin-right: 100px;
+}
+.tb-school-detail .tb-school-scores .cp-table thead {
+  background-color: #f7f7f7;
+}
+.tb-school-detail .tb-school-scores-ctrl select {
+  text-align: center;
+  min-width: 100px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>我的生涯规划</title>
+  <link rel="stylesheet" href="./css/lzx.base.css">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/wei.css">
+  <link rel="stylesheet" href="./css/jquery.fileupload.css">
+</head>
+<body prefix="tb">
+  <div class="cp-container">    
+    <div class="cp-main">
+      <div class="wei-content">        
+        <div class="wei-upload">
+          <div class="wei-card-wrap">
+            <div class="wei-card wei-card-blue">
+              <span class="wei-card-title">视频作品上传</span>
+              <span class="fileinput-button" style="vertical-align: middle">
+                <button class="circle-btn btn1 wei-upload-btn">上传</button>
+                <input class="fileupload-input" acc="video" type="file" name="files[]">
+              </span>
+              <div class="wei-progress-wrap">
+                <span class="wei-upload-name"></span>
+                <div class="wei-progress-container">
+                  <div class="wei-progress"></div>
+                </div>
+                <span class="wei-upload-delete">删除</span>
+              </div>
+            </div>
+            <div class="wei-card wei-card-green">
+              <span class="wei-card-title">活动报告上传</span>
+              <span class="fileinput-button"  style="vertical-align: middle">
+                <button class="circle-btn btn1 wei-upload-btn wei-green-btn">上传</button>
+                <input class="fileupload-input" acc="report" type="file" name="files[]">
+              </span>
+              <div class="wei-progress-wrap">
+                <span class="wei-upload-name" title="我是天下无敌，超越宇宙，啊啊啊啥多阿萨德啊阿萨德、最帅的.mp4">我是天下无敌，超越宇宙，啊啊啊啥多阿萨德啊阿萨德、最帅的.mp4</span>
+                <div class="wei-progress-container">
+                  <div class="wei-progress"></div>
+                </div>                
+                <span class="wei-upload-delete">删除</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="./jquery-1.6.2.min.js"></script>
+  <script src="./js/vendor/jquery.ui.widget.js"></script>
+  <script src="./js/jquery.iframe-transport.js"></script>
+  <script src="./js/jquery.fileupload.js"></script>
+  <script>
+    $(document).ready(function(){      
+      'use strict';
+      // Change this to the location of your server-side upload handler:
+      var url = "/api/upload";
+      var videoTypes = ['.mpeg', '.avi', '.mov', '.wmv', '.mp4', '.3gp', '.mkv', '.flv', '.rmvb', '.f4v'];
+      var reportTypes = ['.ppt', '.word', '.txt', '.pptx', '.xls', '.docx', '.doc', '.xlsx', '.rar', '.zip', '.pdf'];
+      $('.fileupload-input').fileupload({
+          url: url,
+          dataType: 'json',
+          done: function (e, data) {
+            // 上传成功了触发
+            var progress = $(e.target).parent().siblings().filter('.wei-progress-wrap');
+            progress.find('.wei-progress-container').hide();
+            progress.find('.wei-upload-delete').show();
+            progress.find('.wei-upload-name').addClass('upload-finished');
+            var progressEl = progress.find('.wei-progress');
+            progressEl.css('width', '0%');
+            $(e.target).prop('disabled', false);
+          },
+          fail: function (e, data) {
+            $(e.target).prop('disabled', false);
+            // 上传失败了触发，注意，由于设置的dataType为json。所以请上传结束返回json，不然会进入fail
+            console.log('fail')
+          },
+          change: function (e, data) {
+            var progress = $(e.target).parent().siblings().filter('.wei-progress-wrap');
+            progress.find('.wei-upload-name').removeClass('upload-finished');
+            progress.find('.wei-upload-delete').hide();
+          },
+          add: function (e, data) {
+            data.url = '/api/upload?a=xx';
+            var files = data.files;
+            var file = {}
+            if (files.length > 0) {
+              file = files[0];
+            }            
+            // 判断是否是正确的文件类型。
+            if (isRightFile(file.name, $(e.target).attr('acc'))) {
+              $(e.target).prop('disabled', true);
+              var progress = $(e.target).parent().siblings().filter('.wei-progress-wrap');
+              progress.find('.wei-progress-container').show();
+              progress.show().find('.wei-upload-name').attr('title', file.name).text(file.name);  
+              data.submit()
+            }
+            else {
+              console.log('错误的文件')
+            }
+          },
+          start: function () {
+            console.log('start//')
+          },
+          progressall: function (e, data) {
+            var p = parseInt(data.loaded / data.total * 100, 10);
+            var progress = $(e.target).parent().siblings().filter('.wei-progress-wrap');
+            console.log(p)
+            var progressEl = progress.find('.wei-progress');
+            progressEl.css('width', p + '%');
+          }
+      })
+      
+      function isRightFile (filename, type) {
+        var types = []
+        if (type === 'video') {
+          types = videoTypes
+        }
+        if (type === 'report') {
+          types = reportTypes
+        }
+        if (filename) {
+          var suffixs = filename.split('.');
+          if (suffixs.length > 1) {
+            var suffix = '.' + suffixs.pop();
+            if (types.indexOf(suffix) !== -1) {
+              return true
+            }
+          }
+        }
+        return false
+      }
+    })
+  </script>
+</body>
+</html>
